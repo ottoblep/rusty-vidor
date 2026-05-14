@@ -21,6 +21,7 @@
           buildInputs = [
             rust-analyzer
             probe-rs-tools
+            cargo-generate
             (rust-bin.nightly.latest.default.override {
               extensions = [ "rust-src" ];
               targets = [ "thumbv6m-none-eabi" ]; #"arm-unknown-linux-gnueabihf" ];
