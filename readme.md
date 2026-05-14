@@ -1,22 +1,20 @@
 # Rust MKR Vidor Example
 
-## Env
 ### Enter Nix Devshell
 ```bash
 nix develop
 ```
 
-## Rust Build
-### Build binary
+### Build Binary
 ```bash
 cargo build
 ```
 
-## Arduino-CLI
 ### Install board 
 ```bash
 arduino-cli core install arduino:samd
 ```
+
 ### Flash binary
 ```bash
 arduino-cli upload -t -p /dev/ttyACM0 -i target/output.bin -b arduino:samd:mkrvidor4000
