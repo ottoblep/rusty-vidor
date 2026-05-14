@@ -23,10 +23,11 @@
             probe-rs-tools
             bossa-arduino
             cargo-generate
+            cargo-binutils
             flip-link
             cargo-generate
             (rust-bin.nightly.latest.default.override {
-              extensions = [ "rust-src" ];
+              extensions = [ "rust-src" "llvm-tools" ];
               targets = [ "thumbv6m-none-eabi" ]; #"arm-unknown-linux-gnueabihf" ];
             })
           ];
