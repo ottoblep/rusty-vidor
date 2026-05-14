@@ -3,7 +3,7 @@
 
 use defmt_rtt as _; // global logger
 
-// use atsamd-hal as _; // memory layout
+use arduino_mkrvidor4000 as _; // memory layout
 
 use panic_probe as _;
 
