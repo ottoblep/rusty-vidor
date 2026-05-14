@@ -21,6 +21,7 @@
           buildInputs = [
             rust-analyzer
             probe-rs-tools
+            bossa-arduino
             cargo-generate
             flip-link
             cargo-generate
