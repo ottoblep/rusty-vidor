@@ -1,5 +1,11 @@
 # Rust MKR Vidor Example
 
+## Env
+### Enter Nix Devshell
+```bash
+nix develop
+```
+
 ## Rust Build
 ### Build binary
 ```bash
