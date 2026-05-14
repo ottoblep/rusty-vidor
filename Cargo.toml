@@ -4,9 +4,6 @@ name = "rusty-vidor"
 edition = "2024"
 version = "0.1.0"
 
-[lib]
-harness = false
-
 [dependencies]
 cortex-m = { version = "0.7", features = ["critical-section-single-core"] }
 cortex-m-rt = "0.7"
