@@ -20,12 +20,8 @@
         devShells.default = mkShell {
           buildInputs = [
             rust-analyzer
-            probe-rs-tools
-            # bossa-arduino
             arduino-cli
-            cargo-generate
             cargo-binutils
-            flip-link
             cargo-generate
             (rust-bin.nightly.latest.default.override {
               extensions = [ "rust-src" "llvm-tools" ];
