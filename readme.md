@@ -17,5 +17,6 @@ arduino-cli core install arduino:samd
 
 ### Flash binary
 ```bash
-arduino-cli upload -t -p /dev/ttyACM0 -i target/thumbv6m-none-eabi/debug/rusty-vidor -b arduino:samd:mkrvidor4000
+rust-objcopy -O binary target/thumbv6m-none-eabi/debug/rusty-vidor target/output.bin
+arduino-cli upload -t -p /dev/ttyACM0 -i target/output.bin -b arduino:samd:mkrvidor4000
 ```
