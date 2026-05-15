@@ -1,20 +1,18 @@
 #![no_std]
 #![no_main]
 
-use arduino_mkrvidor4000::clock::{ClockGenId, ClockSource};
-use arduino_mkrvidor4000::sercom::v2::uart::{EightBit, FixedCharSize};
 use arduino_mkrvidor4000 as bsp;
 use bsp::hal;
 
 use panic_halt as _;
 use bsp::entry;
-use hal::clock::GenericClockController;
+use hal::clock::{GenericClockController, ClockGenId, ClockSource};
 use hal::delay::Delay;
 use hal::pac::{CorePeripherals, Peripherals};
 use hal::prelude::*;
 
 use hal::sercom::v2::{Sercom5, uart};
-use hal::sercom::v2::uart::{BaudMode, BitOrder, Oversampling, Pads, StopBits};
+use hal::sercom::v2::uart::{BaudMode, BitOrder, Oversampling, Pads, StopBits, EightBit};
 
 #[entry]
 fn main() -> ! {
