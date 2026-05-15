@@ -2,6 +2,7 @@
 #![no_main]
 
 use arduino_mkrvidor4000::clock::{ClockGenId, ClockSource};
+use arduino_mkrvidor4000::sercom::v2::uart::{EightBit, FixedCharSize};
 use arduino_mkrvidor4000 as bsp;
 use bsp::hal;
 
@@ -13,7 +14,7 @@ use hal::pac::{CorePeripherals, Peripherals};
 use hal::prelude::*;
 
 use hal::sercom::v2::{Sercom5, uart};
-use hal::sercom::v2::uart::{BaudMode, BitOrder, NineBit, Oversampling, Pads, StopBits};
+use hal::sercom::v2::uart::{BaudMode, BitOrder, Oversampling, Pads, StopBits};
 
 #[entry]
 fn main() -> ! {
@@ -43,16 +44,17 @@ fn main() -> ! {
         .tx(pins.tx);
     let mut uart = uart::Config::new(&(peripherals.PM), peripherals.SERCOM5, pads, 48.mhz())
         .baud(115200.hz(), BaudMode::Arithmetic(Oversampling::Bits8))
-        .char_size::<NineBit>()
+        .char_size::<EightBit>()
         .bit_order(BitOrder::LsbFirst)
         .stop_bits(StopBits::OneBit)
+        .parity(uart::Parity::None)
         .enable();
 
 
     loop {
         delay.delay_ms(200u8);
-        let data: u16 = 0xABCD;
-        let _ = uart.write(data);
+        let data: char = 'A';
+        let _ = uart.write(data as u8);
         led.set_high().unwrap();
         delay.delay_ms(200u8);
         led.set_low().unwrap();
