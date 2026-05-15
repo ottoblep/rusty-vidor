@@ -13,6 +13,7 @@ use panic_halt as _;
 
 use hal::sercom::v2::uart::{BaudMode, BitOrder, EightBit, Oversampling, Pads, StopBits};
 use hal::sercom::v2::{Sercom5, uart};
+use crate::nb::block;
 
 #[entry]
 fn main() -> ! {
@@ -45,11 +46,16 @@ fn main() -> ! {
         .parity(uart::Parity::None)
         .enable();
 
+    fn log(message: &str, uart: &mut impl _embedded_hal_serial_Write<u8>) {
+        for byte in message.bytes() {
+            let _ = block!(uart.write(byte));
+        }
+    }
+
     loop {
         delay.delay_ms(200u8);
-        let data: char = 'A';
-        let _ = uart.write(data as u8);
         led.set_high().unwrap();
+        log("Hello, world!\n", &mut uart);
         delay.delay_ms(200u8);
         led.set_low().unwrap();
     }
