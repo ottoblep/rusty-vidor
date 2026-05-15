@@ -11,6 +11,9 @@ use hal::delay::Delay;
 use hal::pac::{CorePeripherals, Peripherals};
 use hal::prelude::*;
 
+use hal::sercom::v2::{Sercom5, uart};
+use hal::sercom::v2::uart::{BaudMode, BitOrder, NineBit, Oversampling, Pads, StopBits};
+
 #[entry]
 fn main() -> ! {
     let mut peripherals = Peripherals::take().unwrap();
@@ -24,6 +27,17 @@ fn main() -> ! {
     let mut pins = bsp::Pins::new(peripherals.PORT);
     let mut led = pins.led_builtin.into_open_drain_output(&mut pins.port);
     let mut delay = Delay::new(core.SYST, &mut clocks);
+
+    // UART
+    let pads = Pads::<Sercom5>::default()
+        .rx(pins.rx)
+        .tx(pins.tx);
+    let uart = uart::Config::new(&(peripherals.PM), peripherals.SERCOM5, pads, 10.mhz())
+        .baud(1.mhz(), BaudMode::Arithmetic(Oversampling::Bits16))
+        .char_size::<NineBit>()
+        .bit_order(BitOrder::LsbFirst)
+        .stop_bits(StopBits::OneBit)
+        .enable();
 
     loop {
         delay.delay_ms(200u8);
