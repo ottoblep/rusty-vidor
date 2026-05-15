@@ -33,6 +33,7 @@ fn main() -> ! {
     clocks.sercom5_core(&gclk);
 
     // GPIO
+    #[allow(deprecated)]
     let mut led = pins.led_builtin.into_open_drain_output(&mut pins.port);
     let mut delay = Delay::new(core.SYST, &mut clocks);
 
