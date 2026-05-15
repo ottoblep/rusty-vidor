@@ -32,7 +32,7 @@ fn main() -> ! {
     let pads = Pads::<Sercom5>::default()
         .rx(pins.rx)
         .tx(pins.tx);
-    let uart = uart::Config::new(&(peripherals.PM), peripherals.SERCOM5, pads, 10.mhz())
+    let mut uart = uart::Config::new(&(peripherals.PM), peripherals.SERCOM5, pads, 10.mhz())
         .baud(1.mhz(), BaudMode::Arithmetic(Oversampling::Bits16))
         .char_size::<NineBit>()
         .bit_order(BitOrder::LsbFirst)
@@ -41,6 +41,8 @@ fn main() -> ! {
 
     loop {
         delay.delay_ms(200u8);
+        let data: u16 = 0xABCD;
+        let _ = uart.write(data);
         led.set_high().unwrap();
         delay.delay_ms(200u8);
         led.set_low().unwrap();
