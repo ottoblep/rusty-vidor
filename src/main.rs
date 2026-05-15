@@ -28,7 +28,6 @@ fn main() -> ! {
 
     // UART Clock
     clocks.configure_gclk_divider_and_source(ClockGenId::GCLK0, 1, ClockSource::XOSC32K, false);
-    clocks.configure_standby(ClockGenId::GCLK0, true);
     let gclk = clocks.get_gclk(ClockGenId::GCLK0).unwrap();
     clocks.sercom5_core(&gclk);
 
@@ -47,7 +46,6 @@ fn main() -> ! {
         .stop_bits(StopBits::OneBit)
         .parity(uart::Parity::None)
         .enable();
-
 
     loop {
         delay.delay_ms(200u8);
