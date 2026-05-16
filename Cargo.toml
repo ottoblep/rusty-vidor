@@ -7,9 +7,10 @@ version = "0.1.0"
 [dependencies]
 cortex-m = { version = "0.7", features = ["critical-section-single-core"] }
 cortex-m-rt = "0.7"
+panic-halt = "1.0.0"
 atsamd-hal = { version = "0.23.3", features = ["samd21g"] }
 arduino_mkrvidor4000 = "0.6.1"
-panic-halt = "1.0.0"
+ublox-short-range-rs = { version = "0.1.1", features = ["nina_w1xx"] } # u-blox NINA-W102
 
 # cargo build/run
 [profile.dev]
